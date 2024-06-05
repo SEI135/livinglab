@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="utf-8">
+        <title>Living Lab</title>
+        <style>
+            body {font-family: Consolas, sans-serif;}
+            h1 {margin: 30px 0px; text-align: center;}
+            img {max-width: 100%; display: block; margin: 0px 0px 500px 0px;}          
+            
+            .font {
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: 20px;
+                font-weight: bold;
+                color: #333333;
+            }
+
+            .box {
+                position: relative;
+                left: -20%;
+                width: 300px;
+                height: 150px;
+                padding: 20px;
+                margin: 20px auto;
+                border: 2px solid #c2c7d1;
+                border-radius: 15px;
+                background-color: #fff;
+                text-align: center;
+            }
+            .box label {
+                display: block;
+                margin-bottom: 10px;
+            }
+            .box input {
+                display: block;
+                margin: 0 auto 10px auto;
+            }
+            .box button {
+                padding: 5px 10px;
+                font-size: 16px;
+            }
+            .box img {
+                margin-top: 10px;
+                max-width: 100%;
+                border-radius: 10px;
+            }
+
+            .key-box {
+                position: relative;
+                left: -20%;
+                width: 300px;
+                height: 300px;
+                padding: 20px;
+                margin: 20px auto;
+                border: 2px solid #c2c7d1;
+                border-radius: 15px;
+                background-color: #fff;
+                text-align: center;
+            }
+            .keyword-btn {
+                padding: 10px 20px;
+                margin: 5px;
+                border: 1px solid #c2c7d1;
+                border-radius: 5px;
+                background-color: #f2f2f2;
+                cursor: pointer;
+            }
+            .keyword-btn.selected {
+                background-color: cornflowerblue;
+                color: white;
+            }
+
+            .result {
+                position: absolute;
+                top: 10%;
+                left: 60%;
+                width: 300px;
+                height: 520px;
+                padding: 20px;
+                margin: 20px;
+                border: 2px solid #c2c7d1;
+                border-radius: 15px;
+                background-color: #fff;
+                text-align: center;
+            }
+        </style>
+        <script>
+            function previewImage(event) {
+                const reader = new FileReader();
+                reader.onload = function() {
+                    const output = document.getElementById('output');
+                    output.src = reader.result;
+                    output.style.display = 'block';
+                };
+                reader.readAsDataURL(event.target.files[0]);
+            }
+            function toggleKeyword(button) {
+                button.classList.toggle('selected');
+            }
+        </script>
+    </head>
+    <body bgcolor="#eff2f9">
+        <div style="height: 75px; background-color: #fff;">
+            <p class="font"><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ANIMAL SCANNER</p>
+        </div>
+        <div class="result">
+            <p>진단 내용</p><br>
+            <hr>
+        </div>
+        <div class="box">
+            <p>이미지를 넣으시오</p>
+            <!--<img src=".\ARONG.jpg" alt="" width="288" height="384" loading="lazy" style="max-width: 100%; height: auto; display: block; margin: 0 auto;">-->
+            <hr>
+            <form action="/upload" method="post" enctype="multipart/form-data">
+                <label for="petImage">Upload your pet's photo:</label>
+                <input type="file" id="petImage" name="petImage" accept="image/*" onchange="previewImage(event)" required>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+        <div class="key-box">
+            <p>키워드를 고르시오</p>
+            <hr>  
+            <button class="keyword-btn" onclick="toggleKeyword(this)">관절/뼈</button>
+            <button class="keyword-btn" onclick="toggleKeyword(this)">구강</button>
+            <button class="keyword-btn" onclick="toggleKeyword(this)">기침</button>
+            <button class="keyword-btn" onclick="toggleKeyword(this)">눈</button>
+            <button class="keyword-btn" onclick="toggleKeyword(this)">잠</button>
+            <button class="keyword-btn" onclick="toggleKeyword(this)">콧물</button>
+            <button class="keyword-btn" onclick="toggleKeyword(this)">피부/모발</button>
+        </div>        
+    </body>
+</html>
